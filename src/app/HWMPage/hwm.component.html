@@ -1,0 +1,252 @@
+
+<div class="col-md-6 pull-left topPad bottomPad">
+    <h3>Site Information</h3>
+    <!--site number-->
+    <div class="stn-form-group">
+        <label>Site Number:</label>
+        <span class="col-md-7">{{aSite.site_no || '---'}}</span>
+    </div>
+    <!--site description-->
+    <div class="stn-form-group">
+        <label>Site Description:</label>
+        <span class="col-md-7">{{aSite.site_description || '---'}}</span>
+    </div>
+    <!--Latitude-->
+    <div class="stn-form-group">
+        <label>Latitude:</label>
+        <span class="col-md-7">{{aSite.latitude_dd || '---'}}</span>
+    </div>
+    <!--Longitude-->
+    <div class="stn-form-group">
+        <label>Longitude:</label>
+        <span class="col-md-7">{{aSite.longitude_dd || '---'}}</span>
+    </div>
+    <!--Horizontal Datum-->
+    <div class="stn-form-group">
+        <label>Horizontal Datum:</label>
+        <span class="col-md-7">{{aSite.HorizontalDatum || '---'}}</span>
+    </div>
+    <!--Horizontal Collection Method-->
+    <div class="stn-form-group">
+        <label>Horizontal Collection Method:</label>
+        <span class="col-md-7">{{aSite.HorizontalCollectMethod || '---'}}</span>
+    </div>
+    <!--Address-->
+    <div class="stn-form-group">
+        <label>Address:</label>
+        <span class="col-md-7">{{aSite.address || "---"}}</span>
+    </div>
+    <!--City-->
+    <div class="stn-form-group">
+        <label>City:</label>
+        <span class="col-md-7">{{aSite.city || "---"}}</span>
+    </div>
+    <!--State-->
+    <div class="stn-form-group">
+        <label>State:</label>
+        <span class="col-md-7">{{aSite.state || "---"}}</span>
+    </div>
+    <!--Zip-->
+    <div class="stn-form-group">
+        <label>Zip:</label>
+        <span class="col-md-7">{{aSite.zip || "---"}}</span>
+    </div>
+    <!--County-->
+    <div class="stn-form-group">
+        <label>County:</label>
+        <span class="col-md-7">{{aSite.county || "---"}}</span>
+    </div>
+    <!--Waterbody-->
+    <div class="stn-form-group">
+        <label>Waterbody:</label>
+        <span class="col-md-7">{{aSite.waterbody || '---'}}</span>
+    </div>
+    <!--Drainage Area-->
+    <div class="stn-form-group">
+        <label>Drainage Area (sq mi):</label>
+        <span class="col-md-7">{{aSite.drainage_area_sqmi || "---"}}</span>
+    </div>
+    <!--Station ID for USGS gage-->
+    <div class="stn-form-group">
+        <label>Station ID for USGS gage:</label>
+        <span class="col-md-7">{{aSite.usgs_sid || "---"}}</span>
+    </div>
+    <!--Station ID for NOAA gage-->
+    <div class="stn-form-group">
+        <label>Station ID for NOAA gage:</label>
+        <span class="col-md-7">{{aSite.noaa_sid || "---"}}</span>
+    </div>
+    <!--Other Station ID-->
+    <div class="stn-form-group">
+        <label>Other Station ID:</label>
+        <span class="col-md-7">{{aSite.other_sid || "---"}}</span>
+    </div>
+
+    <br clear="all" />
+    <!-- Peaks -->
+    <div class="col-md-12 topPad">
+        <h3>Peak History for Site {{aSite.site_no}}</h3>        
+        <label>(For comparison, all event peaks are listed for this site.)</label>
+        <table *ngIf="peaks.length > 0" class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Elevation (ft)</th>
+                    <th>Date/Time</th>
+                    <th>Event</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of peaks">
+                    <td>{{p.peak_stage}}</td>
+                    <td>{{p.peak_date | date: 'MM/dd/yyyy HH:mm a'}}</td>
+                    <td>{{p.event_name}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="peaks.length == 0">No peak summaries for this Site.</div>
+    </div>
+
+    <br clear="all" />
+    <h3 class="topPad">HWM Information</h3>
+    <!--provisional or approved-->
+    <div class="stn-form-group">
+        <label>Provisional or Approved:</label>
+        <span class="col-md-7">{{aHWM.approval_id !== undefined ? 'Approved' : 'Provisional'}}</span>
+    </div>
+    <!--event-->
+    <div class="stn-form-group">
+        <label>Event:</label>
+        <span class="col-md-7">{{aHWM.eventName || '---'}}</span>
+    </div>
+    <!--HWM Type-->
+    <div class="stn-form-group">
+        <label>HWM Type:</label>
+        <span class="col-md-7">{{aHWM.hwmType || '---'}}</span>
+    </div>
+    <!--Marker-->
+    <div class="stn-form-group">
+        <label>Marker:</label>
+        <span class="col-md-7">{{aHWM.markerName || '---'}}</span>
+    </div>
+    <!--HWM Environment-->
+    <div class="stn-form-group">
+        <label>HWM Environment:</label>
+        <span class="col-md-7">{{aHWM.hwm_environment || '---'}}</span>
+    </div>
+    <!--HWM Quality-->
+    <div class="stn-form-group">
+        <label>HWM Quality:</label>
+        <span class="col-md-7">{{aHWM.hwmQuality || '---'}}</span>
+    </div>
+    <!--Bank-->
+    <div class="stn-form-group">
+        <label>Bank:</label>
+        <span class="col-md-7">{{aHWM.bank || '---'}}</span>
+    </div>
+    <!--Location Description-->
+    <div class="stn-form-group">
+        <label>Location Description:</label>
+        <span class="col-md-7">{{aHWM.hwm_locationdescription || "---"}}</span>
+    </div>
+    <!--Latitude-->
+    <div class="stn-form-group">
+        <label>Latitude:</label>
+        <span class="col-md-7">{{aHWM.latitude_dd || "---"}}</span>
+    </div>
+    <!--Longitude-->
+    <div class="stn-form-group">
+        <label>Longitude:</label>
+        <span class="col-md-7">{{aHWM.longitude_dd || "---"}}</span>
+    </div>
+    <!--Horizontal Datum-->
+    <div class="stn-form-group">
+        <label>Horizontal Datum:</label>
+        <span class="col-md-7">{{aHWM.hDatum || "---"}}</span>
+    </div>
+    <!--Horizontal Collection Method-->
+    <div class="stn-form-group">
+        <label>Horizontal Collection Method:</label>
+        <span class="col-md-7">{{aHWM.hCollectMethod || "---"}}</span>
+    </div>
+    <!--Height above ground-->
+    <div class="stn-form-group">
+        <label>Height above ground:</label>
+        <span class="col-md-7">{{aHWM.height_above_gnd || '---'}}</span>
+    </div>
+    <!--Flag/Found Date-->
+    <div class="stn-form-group">
+        <label>Flag/Found Date:</label>
+        <span class="col-md-7">{{(aHWM.flag_date | date: 'MM/dd/yyyy') || "---"}}</span>
+    </div>
+    <!--Surveyed Date-->
+    <div class="stn-form-group">
+        <label>Surveyed Date:</label>
+        <span class="col-md-7">{{(aHWM.survey_date | date: 'MM/dd/yyyy') || "---"}}</span>
+    </div>
+    <!--Surveyed Elevation-->
+    <div class="stn-form-group">
+        <label>Surveyed Elevation:</label>
+        <span class="col-md-7">{{aHWM.elev_ft || "---"}}</span>
+    </div>
+    <!--Vertical Datum-->
+    <div class="stn-form-group">
+        <label>Vertical Datum:</label>
+        <span class="col-md-7">{{aHWM.vDatum || "---"}}</span>
+    </div>
+    <!--Vertical Collection Method-->
+    <div class="stn-form-group">
+        <label>Vertical Collection Method:</label>
+        <span class="col-md-7">{{aHWM.vCollectMethod || "---"}}</span>
+    </div>
+    <!--Uncertainty-->
+    <div class="stn-form-group">
+        <label>Uncertainty:</label>
+        <span class="col-md-7">{{aHWM.uncertainty || "---"}}</span>
+    </div>
+    <!--Notes-->
+    <div class="stn-form-group">
+        <label>Notes:</label>
+        <span class="col-md-7">{{aHWM.hwm_notes || "---"}}</span>
+    </div>
+    <!--Tranquil/Stillwater HWM-->
+    <div class="stn-form-group">
+        <label>Tranquil/Stillwater HWM:</label>
+        <span class="col-md-7">{{aHWM.stillwater || "---"}}</span>
+    </div>
+    <!--Flagging Member-->
+    <div class="stn-form-group">
+        <label>Flagging Member:</label>
+        <span class="col-md-7">{{aHWM.flagMember || "---"}}</span>
+    </div>
+    <!--Survey Member-->
+    <div class="stn-form-group">
+        <label>Survey Member:</label>
+        <span class="col-md-7">{{aHWM.surveyMember || "---"}}</span>
+    </div>
+    <br clear="all" />
+</div> <!-- end col-md-6 left-->
+
+<!-- files -->
+<div class="col-md-6 pull-right topPad bottomPad">
+    <h3>HWM Files</h3>
+    <!-- list of existing photo files for this hwm -->
+    <div class="col-md-12" *ngIf="imageFiles.length > 0">
+        <span>            
+            <ul style="padding-left: 0">
+                <li *ngFor="let f of imageFiles" style="list-style:none;padding-bottom: 15px;">
+                    <a target="_blank" title="Download File" [attr.href]="baseURL+'/Files/'+f.file_id+'/Item'">
+                        Photo of {{f.description || '[Description left blank]'}} at {{aSite.site_description}}, {{aSite.county}}, {{aSite.state}}, {{f.photo_date | date: 'MM/dd/yyyy'}}. Photograph by {{f.source.source_name}}, {{f.source.sourceAgency}}.
+                    </a>
+                    <div style="max-width:100px;">
+                        <img style="max-width:100px;" src="{{baseURL}}/Files/{{f.file_id}}/Item" />
+                    </div>
+                </li>
+            </ul>
+        </span>
+    </div> <!-- end if photo files-->
+    <div class="col-md-12" *ngIf="imageFiles.length == 0">
+        No photo files were uploaded for this HWM.
+    </div><!-- no photo files-->
+    <br clear="all" />
+</div><!-- end col-md-6 right-->
+

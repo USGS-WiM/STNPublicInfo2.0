@@ -1,0 +1,357 @@
+<div class="col-md-6 pull-left topPad bottomPad">
+    <h3>Site Information</h3>
+    <!--site number-->
+    <div class="stn-form-group">
+        <label>Site Number:</label>
+        <span class="col-md-7">{{aSite.site_no || '---'}}</span>
+    </div>
+    <!--site description-->
+    <div class="stn-form-group">
+        <label>Site Description:</label>
+        <span class="col-md-7">{{aSite.site_description || '---'}}</span>
+    </div>
+    <!--Latitude-->
+    <div class="stn-form-group">
+        <label>Latitude:</label>
+        <span class="col-md-7">{{aSite.latitude_dd || '---'}}</span>
+    </div>
+    <!--Longitude-->
+    <div class="stn-form-group">
+        <label>Longitude:</label>
+        <span class="col-md-7">{{aSite.longitude_dd || '---'}}</span>
+    </div>
+    <!--Horizontal Datum-->
+    <div class="stn-form-group">
+        <label>Horizontal Datum:</label>
+        <span class="col-md-7">{{aSite.HorizontalDatum || '---'}}</span>
+    </div>
+    <!--Horizontal Collection Method-->
+    <div class="stn-form-group">
+        <label>Horizontal Collection Method:</label>
+        <span class="col-md-7">{{aSite.HorizontalCollectMethod || '---'}}</span>
+    </div>
+    <!--Address-->
+    <div class="stn-form-group">
+        <label>Address:</label>
+        <span class="col-md-7">{{aSite.address || "---"}}</span>
+    </div>
+    <!--City-->
+    <div class="stn-form-group">
+        <label>City:</label>
+        <span class="col-md-7">{{aSite.city || "---"}}</span>
+    </div>
+    <!--State-->
+    <div class="stn-form-group">
+        <label>State:</label>
+        <span class="col-md-7">{{aSite.state || "---"}}</span>
+    </div>
+    <!--Zip-->
+    <div class="stn-form-group">
+        <label>Zip:</label>
+        <span class="col-md-7">{{aSite.zip || "---"}}</span>
+    </div>
+    <!--County-->
+    <div class="stn-form-group">
+        <label>County:</label>
+        <span class="col-md-7">{{aSite.county || "---"}}</span>
+    </div>
+    <!--Waterbody-->
+    <div class="stn-form-group">
+        <label>Waterbody:</label>
+        <span class="col-md-7">{{aSite.waterbody || '---'}}</span>
+    </div>
+    <!--Drainage Area-->
+    <div class="stn-form-group">
+        <label>Drainage Area (sq mi):</label>
+        <span class="col-md-7">{{aSite.drainage_area_sqmi || "---"}}</span>
+    </div>
+    <!--Station ID for USGS gage-->
+    <div class="stn-form-group">
+        <label>Station ID for USGS gage:</label>
+        <span class="col-md-7">{{aSite.usgs_sid || "---"}}</span>
+    </div>
+    <!--Station ID for NOAA gage-->
+    <div class="stn-form-group">
+        <label>Station ID for NOAA gage:</label>
+        <span class="col-md-7">{{aSite.noaa_sid || "---"}}</span>
+    </div>
+    <!--Other Station ID-->
+    <div class="stn-form-group">
+        <label>Other Station ID:</label>
+        <span class="col-md-7">{{aSite.other_sid || "---"}}</span>
+    </div>
+
+    <br clear="all" />
+    <!-- Peaks -->
+    <div class="col-md-12 topPad">
+        <h3>Peak History for Site {{aSite.site_no}}</h3>
+        <label>(For comparison, all event peaks are listed for this site.)</label>
+        <table *ngIf="peaks.length > 0" class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Elevation (ft)</th>
+                    <th>Date/Time</th>
+                    <th>Event</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of peaks">
+                    <td>{{p.peak_stage}}</td>
+                    <td>{{p.peak_date | date: 'MM/dd/yyyy HH:mm a'}}</td>
+                    <td>{{p.event_name}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="peaks.length == 0">No peak summaries for this Site.</div>
+    </div>
+
+    <br clear="all" />
+    <h3 class="topPad">Sensor Information</h3>
+    <!--Event-->
+    <div class="stn-form-group">
+        <label>Event:</label>
+        <span class="col-md-7">{{aSensor.eventName || "---"}}</span>
+    </div>
+    <!-- --- Deployed Status Information --- -->
+    <label style="padding-top:2em;">--- Deployed Status Information ---</label>
+    
+    <!--Sensor Type-->
+    <div class="stn-form-group">
+        <label>Sensor Type:</label>
+        <span class="col-md-7">{{aSensor.sensorType || "---"}}</span>
+    </div>
+    <!--Sensor Brand-->
+    <div class="stn-form-group">
+        <label>Sensor Brand:</label>
+        <span class="col-md-7">{{aSensor.sensorBrand || "---"}}</span>
+    </div>
+    <!--Serial Number-->
+    <div class="stn-form-group">
+        <label>Serial Number:</label>
+        <span class="col-md-7">{{aSensor.serial_number || "---"}}</span>
+    </div>
+    <!--Housing Serial Number-->
+    <div class="stn-form-group">
+        <label>Housing Serial Number:</label>
+        <span class="col-md-7">{{aSensor.housing_serial_number || "---"}}</span>
+    </div>
+    <!--Housing Types-->
+    <div class="stn-form-group">
+        <label>Housing Types:</label>
+        <span class="col-md-7">{{aSensor.housingType || "---"}}</span>
+    </div>
+    <!--Tapedowns-->
+    <div class="stn-form-group">
+        <label>Tapedowns:</label>
+        <span class="col-md-7" *ngIf="depTapeDownTable.length == 0">
+            No Tapedowns on added at Deployment
+        </span>
+    </div>
+    <div class="stn-form-group" *ngIf="depTapeDownTable.length > 0">
+        <div class="col-md-8">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th style="text-align:center">Datum Location</th>
+                        <th style="text-align:center">Elevation</th>
+                        <th style="text-align:center">Offset Correction</th>
+                        <th style="text-align:center">Water Surface</th>
+                        <th style="text-align:center">Ground Surface</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dt of depTapeDownTable">
+                        <td>{{dt.op_name}}</td>
+                        <td style="text-align:center">{{dt.elevation}} {{dt.OPVdatum}}</td>
+                        <td style="text-align:center">{{dt.offset_correction}}</td>
+                        <td style="text-align:center">{{dt.water_surface}}</td>
+                        <td style="text-align:center">{{dt.ground_surface}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br clear="all" />
+    <!--Sensor Elevation (if tapedown)-->
+    <div class="stn-form-group" *ngIf="depTapeDownTable.length > 0">
+        <label>Sensor Elevation:</label>
+        <span class="col-md-7">{{depSenStatus.sensor_elevation || "---"}}</span>
+    </div>
+    <!--Water Surface Elevation (if tapedown)-->
+    <div class="stn-form-group" *ngIf="depTapeDownTable.length > 0">
+        <label>Water Surface Elevation:</label>
+        <span class="col-md-7">{{depSenStatus.ws_elevation || "---"}}</span>
+    </div>
+    <!--Ground Elevation (if tapedown)-->
+    <div class="stn-form-group" *ngIf="depTapeDownTable.length > 0">
+        <label>Ground Elevation:</label>
+        <span class="col-md-7">{{depSenStatus.gs_elevation || "---"}}</span>
+    </div>
+    <!--In feet above (if tapedown)-->
+    <div class="stn-form-group" *ngIf="depTapeDownTable.length > 0">
+        <label>In feet above:</label>
+        <span class="col-md-7">{{depSenStatus.vdatum || "---"}}</span>
+    </div>
+    <!--Vented-->
+    <div class="stn-form-group" *ngIf="aSensor.sensor_type_id == 1">
+        <label>Vented:</label>
+        <span class="col-md-7">{{aSensor.vented || "---"}}</span>
+    </div>
+    <!--Deployment Type-->
+    <div class="stn-form-group">
+        <label>Deployment Type:</label>
+        <span class="col-md-7">{{aSensor.deploymentType || "---"}}</span>
+    </div>
+    <!--Location Description-->
+    <div class="stn-form-group">
+        <label>Location Description:</label>
+        <span class="col-md-7">{{aSensor.location_description || "---"}}</span>
+    </div>
+    <!--Interval-->
+    <div class="stn-form-group">
+        <label>Interval:</label>
+        <span class="col-md-7">{{aSensor.interval || "---"}}</span> <span *ngIf='aSensor.interval'>seconds</span>
+    </div>
+    <!--Deploy Date-->
+    <div class="stn-form-group">
+        <label>Deploy Date:</label>
+        <span class="col-md-7">{{(depSenStatus.time_stamp | date: 'MM/dd/yyyy hh:mm a') || "---"}} UTC</span>
+    </div>
+    <!--Note-->
+    <div class="stn-form-group">
+        <label>Note:</label>
+        <span class="col-md-7">{{depSenStatus.notes || "---"}}</span>
+    </div>
+    <!--Deploy Member-->
+    <div class="stn-form-group">
+        <label>Deploy Member:</label>
+        <span class="col-md-7">{{depSenStatus.deployer || "---"}}</span>
+    </div>
+    <!-- --- RETRIEVAL Information --- -->    
+    <div *ngIf="retSenStatus">
+        <label style="padding-top:2em;">--- {{retSenStatus.status}} Status Information ---</label>
+        <!--Status Type-->
+        <div class="stn-form-group">
+            <label>Status Type:</label>
+            <span class="col-md-7">{{retSenStatus.status || "---"}}</span>
+        </div>
+        <!--Collection Condition-->
+        <div class="stn-form-group">
+            <label>Collection Condition:</label>
+            <span class="col-md-7">{{aSensor.instCollection || "---"}}</span>
+        </div>
+        <!--Note-->
+        <div class="stn-form-group">
+            <label>Note:</label>
+            <span class="col-md-7">{{retSenStatus.notes || "---"}}</span>
+        </div>
+        <!--Retrieve Date-->
+        <div class="stn-form-group">
+            <label>Retrieve Date:</label>
+            <span class="col-md-7">{{(retSenStatus.time_stamp | date: 'MM/dd/yyyy hh:mm a') || "---"}} UTC</span>
+        </div>
+        <!--Tapedowns-->
+        <!--Tapedowns-->
+        <div class="stn-form-group">
+            <label>Tapedowns:</label>
+            <span class="col-md-7" *ngIf="retTapeDownTable.length == 0">No Tapedowns added at Retrieval</span>
+        </div>
+        <div class="stn-form-group" *ngIf="retTapeDownTable.length > 0">
+            <div class="col-md-8">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center">Datum Location</th>
+                            <th style="text-align:center">Elevation</th>
+                            <th style="text-align:center">Offset Correction</th>
+                            <th style="text-align:center">Water Surface</th>
+                            <th style="text-align:center">Ground Surface</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rt of retTapeDownTable">
+                            <td>{{rt.op_name}}</td>
+                            <td style="text-align:center">{{rt.elevation}} {{rt.OPVdatum}}</td>
+                            <td style="text-align:center">{{rt.offset_correction}}</td>
+                            <td style="text-align:center">{{rt.water_surface}}</td>
+                            <td style="text-align:center">{{rt.ground_surface}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br clear="all" />
+        <!--Sensor Elevation (if tapedown)-->
+        <div class="stn-form-group" *ngIf="retTapeDownTable.length > 0">
+            <label>Sensor Elevation:</label>
+            <span class="col-md-7">{{retSenStatus.sensor_elevation || "---"}}</span>
+        </div>
+        <!--Water Surface Elevation (if tapedown)-->
+        <div class="stn-form-group" *ngIf="retTapeDownTable.length > 0">
+            <label>Water Surface Elevation:</label>
+            <span class="col-md-7">{{retSenStatus.ws_elevation || "---"}}</span>
+        </div>
+        <!--Ground Elevation (if tapedown)-->
+        <div class="stn-form-group" *ngIf="retTapeDownTable.length > 0">
+            <label>Ground Elevation:</label>
+            <span class="col-md-7">{{retSenStatus.gs_elevation || "---"}}</span>
+        </div>
+        <!--In feet above (if tapedown)-->
+        <div class="stn-form-group" *ngIf="retTapeDownTable.length > 0">
+            <label>In feet above:</label>
+            <span class="col-md-7">{{retSenStatus.vdatum || "---"}}</span>
+        </div>
+        <!--Retrieve Member-->
+        <div class="stn-form-group">
+            <label>Retrieval Member:</label>
+            <span class="col-md-7">{{retSenStatus.retriever || "---"}}</span>
+        </div>
+        <br clear="all" />
+    </div><!-- end if there is a retrieved status-->
+    <div *ngIf="!retSenStatus">
+        <div style="padding-top:2em;padding-bottom:2em;">This sensor has not been retrieved yet.</div>
+    </div>
+</div> <!-- end col-md-6 left-->
+
+<!-- files -->
+<div class="col-md-6 pull-right topPad bottomPad">
+    <h3>Sensor Files</h3>
+    <!-- list of existing photo files for this hwm -->
+    <label>Data Files</label>
+    <div class="col-md-12"  *ngIf="dataFiles.length > 0">
+        <span> 
+            <ul style="padding: 0">
+                <li *ngFor="let df of dataFiles" style="list-style:none;">
+                    <a target="_blank" title="Download File" [attr.href]="baseURL+'/Files/'+ df.file_id +'/Item'">
+                        {{(df.file_date | date: 'MM/dd/yyyy') || df.file_id}}: {{df.name}}
+                    </a>
+                </li>
+            </ul>
+        </span>
+    </div>
+    <div *ngIf="dataFiles.length == 0">
+        No data files were uploaded for this Sensor.
+    </div><!-- no photo files-->
+    <label>Photo Files</label>
+    <div *ngIf="imageFiles.length > 0">
+        <span>
+            <ul style="padding: 0;margin-top:35px;">
+                <li *ngFor="let f of imageFiles" style="list-style:none;">
+                    <a target="_blank" title="Download File" [attr.href]="baseURL+'/Files/'+f.file_id+'/Item'">
+                        Photo of {{f.description || '[Description left blank]'}} at {{aSite.site_description}}, {{aSite.county}}, {{aSite.state}}, {{f.photo_date | date: 'MM/dd/yyyy'}}. Photograph by {{f.source.source_name}}, {{f.source.sourceAgency}}.
+                    </a>
+                    <div style="max-width:100px;">
+                        <img style="max-width: 100px;" src="{{baseURL}}/Files/{{f.file_id}}/Item" />
+                    </div>
+                </li>
+            </ul>
+        </span>
+    </div> <!-- end if photo files-->
+    <div *ngIf="imageFiles.length == 0">
+        No photo files were uploaded for this Sensor.
+    </div><!-- no photo files-->
+    <br clear="all" />
+
+</div><!-- end col-md-6 right-->
