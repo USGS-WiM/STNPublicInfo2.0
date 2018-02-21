@@ -4,7 +4,7 @@
     "organization": "U.S. Geological Survey",
     "description": "Site, Site Peaks, HWM or Sensor, HWM/Sensor Files information accessed via Flood Event Viewer (FEV)",
     "version": "v2.0.0",
-    "status": "Production",
+    "status": "Development",
 
     "permissions": {
       "usageType": "openSource",
